@@ -34,6 +34,7 @@ public class NewJFrame extends javax.swing.JFrame {
         result = new javax.swing.JLabel();
         start = new javax.swing.JButton();
         next = new javax.swing.JButton();
+        score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,24 +81,25 @@ public class NewJFrame extends javax.swing.JFrame {
             .addComponent(answer, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(enter, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(result)
-                        .addGap(58, 58, 58))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
+                .addComponent(enter, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addComponent(word, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(150, 150, 150))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(score)
+                            .addComponent(result))
+                        .addGap(54, 54, 54))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +110,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(word, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(answer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(result)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(score)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(next)
                     .addComponent(enter))
@@ -123,16 +127,15 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterActionPerformed
     
-        while(enterFlag)
-        {
-        String getAnswer = answer.getText();
+              
+       String getAnswer = answer.getText();
         
         char finalCheck = getAnswer.charAt(0);
         
         
         guess(finalCheck); //sending the character 
+       
         
-        }
         
         
         
@@ -151,6 +154,11 @@ count = 0;
 word.setText(hintList[count]);
 result.setText("START");
 answer.setText(null);
+
+i=0;
+a=0;
+
+score.setText(a+"/5");
 
 // TODO add your handling code here:
     }//GEN-LAST:event_startActionPerformed
@@ -200,11 +208,12 @@ answer.setText(null);
     private javax.swing.JLabel level;
     private javax.swing.JButton next;
     private javax.swing.JLabel result;
+    private javax.swing.JLabel score;
     private javax.swing.JButton start;
     private javax.swing.JLabel word;
     // End of variables declaration//GEN-END:variables
 
-    String[] wordList = new String[]{"Shrey","Khetrapal","Mariyam","Ashraf","Ashi","Jain"};
+    String[] wordList = new String[]{"Shrey","Khetrapal","Mariyam","Ashraf","Ashi","Idiot"};
     
     String[] hintList = new String[]{"Sh_ey","Kh_trapal","Mar_yam","As_raf","As_i","Id_ot"};   
     
@@ -214,19 +223,26 @@ answer.setText(null);
     
     boolean resultFLAG = true;
     
+    boolean getOut = true;
     
+    int i;
+    int a = 1 ;
 
 
 public void guess(char answer)
 {
-    int a = 0 ;
+    
     
     String checker = hintList[count];
     
     System.out.println("Input character ="+answer);
     System.out.println("Checking with"+checker);
     
-    int i=0;
+    int len = checker.length();
+    
+    System.out.println("Length of len ="+len);
+    
+    i = 0;
     
     do
     {
@@ -247,18 +263,35 @@ public void guess(char answer)
             
             {
                 result.setText("Try Again");
+                if(a==5)
+                update();
+                else
+                {score.setText(a+"/5");
+                a++;}
+                
+                System.out.println("Tries = "+a);
+                
+                
+                
             }
             
         } 
-//        else 
-//        {
-//         result.setText("Try Again");
-//         
-//        } 
+        
         
         i++;
+
         
-    }while(resultFLAG = true && i<hintList[count].length());
+        
+         //HOW TO UPDATE 'I'
+        
+    }while(i<len);
+    
+    System.out.println("DONE");
+    enterFlag=false;
+    
+    
+    System.out.println("i = "+i);
+    System.out.println("count ="+count);
    
 }
 
@@ -274,6 +307,8 @@ public int update()
     answer.setText(null);
     level.setText("Level "+(count+1));
     enterFlag = true;
+    i=0;
+    a=1;
    
     return 0;
 
